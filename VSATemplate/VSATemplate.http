@@ -1,0 +1,6 @@
+@VSATemplate_HostAddress = http://localhost:5293
+
+GET {{VSATemplate_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
