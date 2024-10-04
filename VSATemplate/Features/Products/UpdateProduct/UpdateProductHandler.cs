@@ -4,10 +4,11 @@ public sealed record UpdateProductCommand(
     string Name,
     string Description,
     List<string> Categories,
-    decimal Price) : ICommand<UpdateProductResult>;
+    decimal Price) : ICommand<Result<UpdateProductResult>>;
 public sealed record UpdateProductResult(bool IsSuccess);
 
-public class UpdateProductCommandValidator : AbstractValidator<UpdateProductCommand>
+public sealed class UpdateProductCommandValidator :
+    AbstractValidator<UpdateProductCommand>
 {
     public UpdateProductCommandValidator()
     {
@@ -26,10 +27,10 @@ public class UpdateProductCommandValidator : AbstractValidator<UpdateProductComm
     }
 }
 
-internal class UpdateProductCommandHandler(ApplicationDbContext dbContext)
-    : ICommandHandler<UpdateProductCommand, UpdateProductResult>
+internal sealed class UpdateProductCommandHandler(ApplicationDbContext dbContext)
+    : ICommandHandler<UpdateProductCommand, Result<UpdateProductResult>>
 {
-    public async Task<UpdateProductResult> Handle(UpdateProductCommand command,
+    public async Task<Result<UpdateProductResult>> Handle(UpdateProductCommand command,
         CancellationToken cancellationToken)
     {
         var product = await dbContext
@@ -38,7 +39,7 @@ internal class UpdateProductCommandHandler(ApplicationDbContext dbContext)
 
         if (product is null)
         {
-            throw new ProductNotFoundException(command.Id);
+            return Result.Failure<UpdateProductResult>(ProductErrors.NotFound(command.Id));
         }
 
         product.Name = command.Name;

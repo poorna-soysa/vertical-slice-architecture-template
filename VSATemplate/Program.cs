@@ -1,4 +1,6 @@
 
+using VSATemplate.Exceptions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var assembly = typeof(Program).Assembly;
@@ -8,12 +10,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.
-    AddSQLDatabaseConfiguration(builder.Configuration);
-
-builder.Services.
-    AddMediatRConfiguration(assembly)
+    AddSQLDatabaseConfiguration(builder.Configuration)
+    .AddMediatRConfiguration(assembly)
     .AddValidatorsFromAssembly(assembly)
-    .AddCarter();
+    .AddCarter()
+    .AddExceptionHandler<GlobalExceptionHandler>();
 
 var app = builder.Build();
 
@@ -26,5 +27,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.MapCarter();
+app.UseExceptionHandler(options => { });
 
 app.Run();

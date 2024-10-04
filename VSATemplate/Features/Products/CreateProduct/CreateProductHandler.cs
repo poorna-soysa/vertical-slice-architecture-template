@@ -3,10 +3,11 @@ public sealed record CreateProductCommand(
     string Name,
     string Description,
     List<string> Categories,
-    decimal Price) : ICommand<CreateProductResult>;
+    decimal Price) : ICommand<Result<CreateProductResult>>;
 public sealed record CreateProductResult(Guid Id);
 
-public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
+public sealed class CreateProductCommandValidator 
+    : AbstractValidator<CreateProductCommand>
 {
     public CreateProductCommandValidator()
     {
@@ -26,9 +27,9 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
 }
 
 internal class CreateProductCommandHandler(ApplicationDbContext dbContext)
-    : ICommandHandler<CreateProductCommand, CreateProductResult>
+    : ICommandHandler<CreateProductCommand, Result<CreateProductResult>>
 {
-    public async Task<CreateProductResult> Handle(CreateProductCommand command,
+    public async Task<Result<CreateProductResult>> Handle(CreateProductCommand command,
         CancellationToken cancellationToken)
     {
         var product = new Product

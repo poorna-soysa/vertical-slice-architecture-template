@@ -23,9 +23,9 @@ public sealed class UpdateProductEndpoint : ICarterModule
 
             var result = await sender.Send(command);
 
-            var response = new UpdateProductResponse(result.IsSuccess);
-
-            Results.Ok(response);
+            return result.Match(
+               onSuccess: () => Results.Ok(result.IsSuccess),
+               onFailure: error => Results.BadRequest(error));
         })
         .WithName("UpdateProduct")
         .Produces<UpdateProductResponse>(StatusCodes.Status200OK)

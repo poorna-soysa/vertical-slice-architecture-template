@@ -1,4 +1,6 @@
-﻿namespace VSATemplate.Features.Products.CreateProduct;
+﻿using VSATemplate.Extensions;
+
+namespace VSATemplate.Features.Products.CreateProduct;
 
 public sealed record CreateProductRequest(
     string Name,
@@ -21,9 +23,9 @@ public sealed class CreateProductEndpoint : ICarterModule
 
             var result = await sender.Send(command);
 
-            var response = new CreateProductResponse(result.Id);
-
-            Results.Created($"api/products/{response.Id}", response);
+            return result.Match(
+                onSuccess: () => Results.Created($"api/products/{result.Value.Id}", result.Value),
+                onFailure: error => Results.BadRequest(error));
         })
         .WithName("CreateProduct")
         .Produces<CreateProductResponse>(StatusCodes.Status201Created)
