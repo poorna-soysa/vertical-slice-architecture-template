@@ -1,6 +1,4 @@
-﻿using VSATemplate.Extensions;
-
-namespace VSATemplate.Features.Products.CreateProduct;
+﻿namespace VSATemplate.Features.Products.CreateProduct;
 
 public sealed record CreateProductRequest(
     string Name,

@@ -1,6 +1,3 @@
-
-using VSATemplate.Exceptions;
-
 var builder = WebApplication.CreateBuilder(args);
 
 var assembly = typeof(Program).Assembly;
