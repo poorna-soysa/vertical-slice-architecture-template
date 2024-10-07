@@ -6,6 +6,8 @@ global using FluentValidation;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.AspNetCore.Diagnostics;
 global using Microsoft.AspNetCore.Mvc;
+global using HealthChecks.UI.Client;
+global using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 global using VSATemplate.Abstractions.CQRS;
 global using VSATemplate.Database;

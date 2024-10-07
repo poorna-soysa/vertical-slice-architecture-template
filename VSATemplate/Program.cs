@@ -11,7 +11,8 @@ builder.Services.
     .AddMediatRConfiguration(assembly)
     .AddValidatorsFromAssembly(assembly)
     .AddCarter()
-    .AddExceptionHandler<GlobalExceptionHandler>();
+    .AddExceptionHandler<GlobalExceptionHandler>()
+    .AddHealthChecksConfiguration();
 
 var app = builder.Build();
 
@@ -23,6 +24,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.MapHealthChecksConfiguration();
 app.MapCarter();
 app.UseExceptionHandler(options => { });
 
