@@ -8,7 +8,7 @@ public static class HealthChecksExtensions
             .AddDbContextCheck<ApplicationDbContext>();
         return services;
     }
-    public static IEndpointRouteBuilder MapHealthChecksConfiguration(this IEndpointRouteBuilder app)
+    public static IEndpointRouteBuilder UseHealthChecks(this IEndpointRouteBuilder app)
     {
         app.MapHealthChecks("health", new HealthCheckOptions
         {

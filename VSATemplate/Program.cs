@@ -24,7 +24,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.MapHealthChecksConfiguration();
+app.UseHealthChecks();
 app.MapCarter();
 app.UseExceptionHandler(options => { });
 
