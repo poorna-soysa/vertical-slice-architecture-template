@@ -8,6 +8,7 @@ This repository provides a template for building applications using the Vertical
 - [Architecture Overview](#architecture-overview)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
+- [Folder Structure](#folder-structure)
 - [Setup](#setup)
 - [Contributing](#contributing)
 - [License](#license)
@@ -49,6 +50,7 @@ This template follows the Vertical Slice Architecture, which organizes code by f
 - **FluentValidation Library**: Validation library for .NET.
 - **Entity Framework Core**: Object-relational mapper for .NET.
 - **Result Pattern**: Standardized way of handling operation results.
+- **Health Checks**:  standardized approach for monitoring and assessing the operational status of systems.
 
 ## Technologies Used
 
@@ -58,6 +60,34 @@ This template follows the Vertical Slice Architecture, which organizes code by f
 - **Carter Library**
 - **FluentValidation**
 - **EF Core**
+- **HealthChecks Library**
+
+## Folder Structure
+
+- **/src**: Contains the main application code.
+  - **/Features**: Each feature is organized into its own folder, promoting encapsulation.
+    - **/Products**: Contains all product related files for the feature.
+       - **/CreateProduct**:  Logic for creating a product.
+       - **/DeleteProduct**: Logic for deleting a product.
+       - **/GetProductById**: Logic for retrieving a product by its Id.
+       - **/GetProducts**: Logic for retrieving a list of products.
+       - **/UpdateProduct**: Logic for updating product details.
+       - **ProductErrors**: Contains all product-related error handling.
+    - **FeatureXController.cs**: Entry point for HTTP requests related to the feature.
+  - **/Abstractions**: Contains shared interfaces and contracts.
+     - **/CQRS**: Contains all CQRS abstraction interfaces.
+     - **/Errors**: Define Error class.
+     - **/ResultResponse**: Standardized response structures for API results.
+  - **/Behaviors**: Contains middleware and behaviors that apply to requests and responses.
+  - **/Database**: Contains database-related code, including DB Context.
+  - **/Entities**: Defines the core data models used throughout the application.
+  - **/Exceptions**: Contains the global exception handler for the application.
+  - **/Extensions**: Contains extension methods for various classes and services.
+  - **/Migrations**: Database migration files for schema updates.
+  - **Program.cs**: Application entry point.
+
+- **/tests**: Contains unit and integration tests for the features and common components.
+
 
 ## Setup
 
