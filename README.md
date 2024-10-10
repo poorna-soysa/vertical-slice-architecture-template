@@ -50,7 +50,7 @@ This template follows the Vertical Slice Architecture, which organizes code by f
 - **FluentValidation Library**: Validation library for .NET.
 - **Entity Framework Core**: Object-relational mapper for .NET.
 - **Result Pattern**: Standardized way of handling operation results.
-- **Health Checks**:  standardized approach for monitoring and assessing the operational status of systems.
+- **Health Checks**: Standardized approach for monitoring and assessing the operational status of systems.
 
 ## Technologies Used
 
