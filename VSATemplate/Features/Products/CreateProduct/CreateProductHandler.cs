@@ -6,7 +6,7 @@ public sealed record CreateProductCommand(
     decimal Price) : ICommand<Result<CreateProductResult>>;
 public sealed record CreateProductResult(Guid Id);
 
-public sealed class CreateProductCommandValidator 
+public sealed class CreateProductCommandValidator
     : AbstractValidator<CreateProductCommand>
 {
     public CreateProductCommandValidator()
@@ -26,8 +26,8 @@ public sealed class CreateProductCommandValidator
     }
 }
 
-public sealed class CreateProductCommandHandler(ApplicationDbContext dbContext)
-    : ICommandHandler<CreateProductCommand, Result<CreateProductResult>>
+internal sealed class CreateProductCommandHandler(ApplicationDbContext dbContext)
+   : ICommandHandler<CreateProductCommand, Result<CreateProductResult>>
 {
     public async Task<Result<CreateProductResult>> Handle(CreateProductCommand command,
         CancellationToken cancellationToken)
