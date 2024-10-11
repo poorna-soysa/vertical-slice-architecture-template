@@ -26,7 +26,7 @@ public sealed class CreateProductCommandValidator
     }
 }
 
-internal class CreateProductCommandHandler(ApplicationDbContext dbContext)
+public sealed class CreateProductCommandHandler(ApplicationDbContext dbContext)
     : ICommandHandler<CreateProductCommand, Result<CreateProductResult>>
 {
     public async Task<Result<CreateProductResult>> Handle(CreateProductCommand command,
